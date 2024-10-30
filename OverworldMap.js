@@ -8,6 +8,8 @@ class OverworldMap {
 
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
+
+    this.isCutscenePlaying = false;
   }
 
   drawLowerImage(ctx, cameraPerson) {
@@ -32,10 +34,13 @@ class OverworldMap {
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach((obj) => {
+    Object.keys(this.gameObjects).forEach((key) => {
+      let object = this.gameObjects[key];
+      object.id = key;
+
       //TODO: determine if this obj should actually mount
 
-      obj.mount(this);
+      object.mount(this);
     });
   }
 
@@ -63,10 +68,28 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(6),
       }),
-      npc1: new Person({
-        x: utils.withGrid(4),
-        y: utils.withGrid(8),
+      npcA: new Person({
+        x: utils.withGrid(3),
+        y: utils.withGrid(5),
         src: "/images/characters/people/npc1.png",
+        behaviorLoop: [
+          { type: "stand", direction: "left", time: 1700 },
+          { type: "stand", direction: "down", time: 1800 },
+          { type: "stand", direction: "right", time: 1200 },
+          { type: "stand", direction: "down", time: 1600 },
+        ],
+      }),
+      npcB: new Person({
+        x: utils.withGrid(3),
+        y: utils.withGrid(7),
+        src: "/images/characters/people/npc2.png",
+        behaviorLoop: [
+          { type: "walk", direction: "left" },
+          { type: "stand", direction: "up", time: 800 },
+          { type: "walk", direction: "up" },
+          { type: "walk", direction: "right" },
+          { type: "walk", direction: "down" },
+        ],
       }),
     },
     walls: {
