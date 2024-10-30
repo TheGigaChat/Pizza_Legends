@@ -52,5 +52,18 @@ class Overworld {
     this.directionInput.init();
 
     this.startGameLoop();
+    this.map.startCutscene([
+      { who: "hero", type: "walk", direction: "up" },
+      { who: "hero", type: "walk", direction: "up" },
+      { who: "hero", type: "walk", direction: "left" },
+      { who: "hero", type: "walk", direction: "down" },
+      { who: "npcA", type: "walk", direction: "left" },
+      { who: "npcA", type: "walk", direction: "left" },
+      { who: "npcA", type: "stand", direction: "left", time: 1600 },
+      { who: "hero", type: "walk", direction: "right" },
+      { who: "npcA", type: "walk", direction: "right" },
+      { who: "npcA", type: "walk", direction: "right" },
+      { who: "npcA", type: "walk", direction: "right" },
+    ]);
   }
 }
