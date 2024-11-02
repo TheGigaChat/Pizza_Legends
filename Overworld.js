@@ -76,19 +76,12 @@ class Overworld {
     this.directionInput.init();
 
     this.startGameLoop();
-    // this.map.startCutscene([
-    //   { who: "hero", type: "walk", direction: "up" },
-    //   // { who: "hero", type: "walk", direction: "up" },
-    //   // { who: "hero", type: "walk", direction: "left" },
-    //   // { who: "hero", type: "walk", direction: "down" },
-    //   // { who: "hero", type: "stand", direction: "left", time: 10 },
-    //   // { who: "npcA", type: "walk", direction: "left" },
-    //   // { who: "npcA", type: "walk", direction: "left" },
-    //   // { who: "npcA", type: "stand", direction: "left", time: 1600 },
-    //   // { who: "npcA", type: "walk", direction: "right" },
-    //   // { who: "npcA", type: "walk", direction: "right" },
-    //   // { who: "npcA", type: "stand", direction: "right", time: 200 },
-    //   // { type: "textMessage", text: "Hello! Why are you here?" },
-    // ]);
+    this.map.startCutscene([
+      { type: "changeMap", map: "Kitchen" },
+      {
+        type: "textMessage",
+        text: "Hello! Why are you here? Hello! Why are you here?????",
+      },
+    ]);
   }
 }
