@@ -77,11 +77,11 @@ class Overworld {
 
     this.startGameLoop();
     this.map.startCutscene([
-      { type: "changeMap", map: "Kitchen" },
-      {
-        type: "textMessage",
-        text: "Hello! Why are you here? Hello! Why are you here?????",
-      },
+      // { type: "changeMap", map: "Kitchen" },
+      // {
+      //   type: "textMessage",
+      //   text: "Hello! Why are you here? Hello! Why are you here?????",
+      // },
     ]);
   }
 }
