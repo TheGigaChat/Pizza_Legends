@@ -6,6 +6,19 @@ class Combatant {
     this.battle = battle;
   }
 
+  get hpPercent() {
+    const percent = (this.hp / this.maxHp) * 100;
+    return percent > 0 ? percent : 0;
+  }
+
+  get xpPercent() {
+    return (this.xp / this.maxXp) * 100;
+  }
+
+  get isActive() {
+    return this.battle.activeCombatants[this.team] === this.id;
+  }
+
   createElement() {
     this.hudElement = document.createElement("div");
     this.hudElement.classList.add("Combatant");
@@ -28,10 +41,42 @@ class Combatant {
       </svg>
       <p class="Combatant_status"></p>
     `;
+
+    this.pizzaElement = document.createElement("img");
+    this.pizzaElement.classList.add("Pizza");
+    this.pizzaElement.setAttribute("src", this.src);
+    this.pizzaElement.setAttribute("alt", this.name);
+    this.pizzaElement.setAttribute("data-team", this.team);
+
+    this.hpFills = this.hudElement.querySelectorAll(
+      ".Combatant_life-container > rect"
+    );
+    this.xpFills = this.hudElement.querySelectorAll(
+      ".Combatant_xp-container > rect"
+    );
+  }
+
+  update(changes = {}) {
+    Object.keys(changes).forEach((key) => {
+      this[key] = changes[key];
+    });
+
+    //Show who is displayed now
+    this.hudElement.setAttribute("data-active", this.isActive);
+    this.pizzaElement.setAttribute("data-active", this.isActive);
+
+    //Update hp & xp
+    this.hpFills.forEach((rect) => (rect.style.width = `${this.hpPercent}%`));
+    this.xpFills.forEach((rect) => (rect.style.width = `${this.xpPercent}%`));
+
+    //Update level
+    this.hudElement.querySelector(".Combatant_level").innerHTML = this.level;
   }
 
   init(container) {
     this.createElement();
     container.appendChild(this.hudElement);
+    container.appendChild(this.pizzaElement);
+    this.update();
   }
 }
